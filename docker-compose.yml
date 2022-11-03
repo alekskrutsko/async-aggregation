@@ -1,0 +1,19 @@
+services:
+    flask_1:
+        build: ./flask_server
+        restart: on-failure
+        ports:
+            - "5001:5001"
+    flask_2:
+        build: ./flask_server
+        restart: on-failure
+        ports:
+            - "5002:5002"
+    aiohttp:
+        build: ./aiohttp_server
+        restart: on-failure
+        ports:
+            -  "8080:8080"
+        depends_on:
+            -   flask_1
+            -   flask_2
